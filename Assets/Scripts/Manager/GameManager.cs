@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
 
+[AddComponentMenu("Game System RPG/Manager/GameManager")]
+
 public class GameManager : MonoBehaviour
 {
+    
     public GameState gameState = GameState.Alive;
     private static GameManager _instance;
     public static GameManager Instance
@@ -36,5 +39,5 @@ public enum GameState
     Alive,
     Dead,
     Pause,
-    MenuOpenMISC
+    MenuOpenMisc
 }

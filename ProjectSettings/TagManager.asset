@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Audio
   - Light
+  - NPC
+  - Item
+  - Chest
   layers:
   - Default
   - TransparentFX
