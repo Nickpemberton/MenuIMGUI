@@ -26,10 +26,6 @@ namespace Player
             if (GameManager.Instance.gameState == GameState.Alive)
             {
                 
-                if (Input.GetKeyUp(KeyCode.LeftShift))
-                {
-                    speed = 5f;
-                }
                 if (_charC.isGrounded)
                 {
                     /*
@@ -42,7 +38,10 @@ namespace Player
                     {
                         speed = 7f;
                     }
-                    
+                    else
+                    {
+                        speed = 5f;
+                    }
                     
 
 
