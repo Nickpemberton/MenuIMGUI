@@ -25,6 +25,11 @@ namespace Player
         {
             if (GameManager.Instance.gameState == GameState.Alive)
             {
+                
+                if (Input.GetKeyUp(KeyCode.LeftShift))
+                {
+                    speed = 5f;
+                }
                 if (_charC.isGrounded)
                 {
                     /*
@@ -32,6 +37,13 @@ namespace Player
                     _moveDir = transform.TransformDirection(_moveDir);
                     _moveDir *= speed;
                     */
+
+                    if (Input.GetKeyDown(KeyCode.LeftShift))
+                    {
+                        speed = 8f;
+                    }
+                    
+                    
 
 
                     _moveDir = speed * transform.TransformDirection(new Vector3(Input.GetAxis("Horizontal"), 0,Input.GetAxis("Vertical")));
