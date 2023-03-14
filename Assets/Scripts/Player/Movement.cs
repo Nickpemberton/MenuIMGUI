@@ -38,9 +38,9 @@ namespace Player
                     _moveDir *= speed;
                     */
 
-                    if (Input.GetKeyDown(KeyCode.LeftShift))
+                    if (Input.GetKey(KeyCode.LeftShift))
                     {
-                        speed = 8f;
+                        speed = 7f;
                     }
                     
                     
