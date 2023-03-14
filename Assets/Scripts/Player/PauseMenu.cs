@@ -18,7 +18,7 @@ namespace Player
             //set show DLG to true
             showPause = true;
             //stop movement and mouselook
-            GameManager.Instance.gameState = GameState.MenuOpenMisc;
+            GameManager.Instance.gameState = GameState.Pause;
             //set index to 0 
 
             //set the 16:9 screen shiz just incase we need it
