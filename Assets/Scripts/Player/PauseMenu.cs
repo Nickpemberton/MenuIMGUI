@@ -24,6 +24,8 @@ namespace Player
             //set the 16:9 screen shiz just incase we need it
             screenScale.x = Screen.width / 16;
             screenScale.y = Screen.height / 9;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
 
         }
 
@@ -34,6 +36,8 @@ namespace Player
             //allow player to have movement and mouselook
             GameManager.Instance.gameState = GameState.Alive;
             //set index to 0
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
 
         }
 
@@ -57,6 +61,11 @@ namespace Player
             if (showPause)
             {
                 GUI.Box(new Rect(0, 0, screenScale.x * 16, screenScale.y * 9), "");
+                
+                if (GUI.Button(new Rect(screenScale.x * 7, screenScale.y * 2, screenScale.x * 2, screenScale.y), "Resume"))
+                {
+                    ClosePause();
+                }
 
                 if (GUI.Button(new Rect(screenScale.x * 7, screenScale.y * 7, screenScale.x * 2, screenScale.y),"Exit To Menu"))
                 {

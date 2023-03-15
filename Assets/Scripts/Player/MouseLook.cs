@@ -32,6 +32,8 @@ namespace Player
             {
                 GetComponent<Rigidbody>().freezeRotation = true;
             }
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
         void Update()
         {

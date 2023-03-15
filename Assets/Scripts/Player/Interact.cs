@@ -27,9 +27,9 @@ namespace Player
                     //if that hits a tagged NPC
                     if (hitInfo.collider.tag == "NPC")
                     {
-                        if (hitInfo.collider.gameObject.GetComponent<NPC.OptionDialogue>())
+                        if (hitInfo.collider.gameObject.GetComponent<NPC.DialogueParent>())
                         {
-                            hitInfo.collider.gameObject.GetComponent<NPC.OptionDialogue>().OpenDialogue();
+                            hitInfo.collider.gameObject.GetComponent<NPC.DialogueParent>().OpenDialogue();
                         }
                     }
                     

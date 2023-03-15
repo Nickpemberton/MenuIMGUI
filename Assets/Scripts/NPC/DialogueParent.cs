@@ -36,6 +36,8 @@ namespace NPC
             //set the 16:9 screen shiz just incase we need it
             screenScale.x = Screen.width / 16;
             screenScale.y = Screen.height / 9;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             
         }
         
@@ -47,6 +49,8 @@ namespace NPC
             GameManager.Instance.gameState = GameState.Alive;
             //set index to 0
             currentLineIndex = 0;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 }

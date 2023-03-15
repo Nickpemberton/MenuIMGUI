@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -921,17 +921,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 1897659411}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b635a5d8129d364da1776a7f772db67, type: 3}
+  m_Script: {fileID: 11500000, guid: a822ac7cf229716468896db71ba52634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   showDialogue: 0
-  npcName: Test
+  npcName: Dave
   dlgText:
-  - 1st Line
-  - 2nd Line
-  - 3rd Line
-  - 4th Line
-  - 5th Line
+  - Hello Voyager!
+  - Help Me with my quest!
   currentLineIndex: 0
   screenScale: {x: 0, y: 0}
-  questionIndex: 2
+  questionIndex: 1
+  dislikeText:
+  - Fuck you lol
+  - Will you help me this time dick?
+  - Worst Human :(
+  - U suck
+  - bye. >:(
+  likeText:
+  - I like you
+  - Help me again pls
+  - Love of my life <3
+  - Ilysm
+  - BYEEE! ILY
+  neutralText:
+  - Hey there!
+  - Help me with a quest?
+  - 
+  - 
+  - 
+  _approval: 1
