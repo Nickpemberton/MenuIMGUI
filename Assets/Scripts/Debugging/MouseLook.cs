@@ -13,7 +13,7 @@ namespace Debugging
 
         [Header("Rotation Variables")]
         public RotationalAxis axis = RotationalAxis.MouseX;
-        [Range(0,600)]
+        [Range(0,3)]
         public float sensitivity = 100;
         public float minY = -60, maxY = 60;
         private float _rotY;
@@ -36,13 +36,13 @@ namespace Debugging
         {
             if(axis == RotationalAxis.MouseX)
             {
-                transform.Rotate(0,Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime,0);
+                transform.Rotate(0,Input.GetAxis("Mouse X") * sensitivity,0);
             }
             else
             {
-                _rotY += Input.GetAxis("Mouse Y")  * sensitivity * Time.deltaTime;
+                _rotY += Input.GetAxis("Mouse Y")  * sensitivity;
                 _rotY = Mathf.Clamp(_rotY,minY,maxY);
-                transform.localEulerAngles = new Vector3(-_rotY,0);
+                transform.localEulerAngles = new Vector3(-_rotY, 0, 0);
             }
         }
     }   

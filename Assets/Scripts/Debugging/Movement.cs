@@ -14,7 +14,7 @@ namespace Debugging
         
         private void Start()
         {
-            _charC = this.GetComponent<CharacterController>();
+            _charC = GetComponent<CharacterController>();
         }
         private void Update()
         {
@@ -24,11 +24,11 @@ namespace Debugging
         {
             if (_charC.isGrounded)
             {
-                if (Input.GetKey(KeyCode.LeftShift))
+                if (Input.GetButton("Sprint"))
                 {
                     moveSpeed = runSpeed;
                 }
-                else if (Input.GetKey(KeyCode.LeftControl))
+                else if (Input.GetButton("Crouch"))
                 {
                     moveSpeed = crouchSpeed;
                 }

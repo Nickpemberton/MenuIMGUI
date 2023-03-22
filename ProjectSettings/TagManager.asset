@@ -9,11 +9,12 @@ TagManager:
   - NPC
   - Item
   - Chest
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Postprocessing
+  - FX
   - Water
   - UI
   - 
