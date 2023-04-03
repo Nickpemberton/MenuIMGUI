@@ -25,6 +25,7 @@ namespace NPC
         [SerializeField] private float runSpeed;
         [SerializeField] private float walkSpeed;
         private bool _coroutineActive;
+        private State _state;
 
 
         void Start()
@@ -51,24 +52,33 @@ namespace NPC
                     }
 
                     inRange = true;
-                    _animator.SetBool("Walk", false);
-                    _animator.SetBool("Run", true);
+                    
                     _agent.speed = runSpeed;
                     transform.LookAt(target);
 
 
-                    
-                    if (distTo < 3.3f)
+                    if (distTo <= 5f && _state != State.Idle)
                     {
+                        _animator.SetBool("Walk", false);
                         _animator.SetBool("Idle", true);
                         _animator.SetBool("Run", false);
+                        _state = State.Idle;
+                    }
+                    if (distTo <= 3.3f)
+                    {
+                        //_animator.SetBool("Idle", true);
+                        //_animator.SetBool("Run", false);
                         _agent.destination = transform.position;
                         //Start attacking
-                    }
-                    else
+                    }else if (distTo > 5f)
                     {
-                        _animator.SetBool("Idle", false);
-                        _animator.SetBool("Run", true);
+                        if (_state != State.Run)
+                        {
+                            _animator.SetBool("Walk", false);
+                            _animator.SetBool("Idle", false);
+                            _animator.SetBool("Run", true);
+                            _state = State.Run;
+                        }
                         Vector3 moveTo = Vector3.MoveTowards(transform.position, target.position, 100f);
                         _agent.destination = moveTo;
                     }
@@ -137,6 +147,16 @@ namespace NPC
                 _animator.SetBool("Walk", false);
                 _animator.SetBool("Idle", true);
                 StartCoroutine(Waypointscycle());
+        }
+        
+        
+        
+        private enum State
+        {
+            Idle,
+            Walk,
+            Run,
+            Attack
         }
         }
     }
