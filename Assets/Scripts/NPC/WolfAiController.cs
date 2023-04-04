@@ -25,7 +25,7 @@ namespace NPC
         [SerializeField] private float runSpeed;
         [SerializeField] private float walkSpeed;
         private bool _coroutineActive;
-        private State _state;
+        [SerializeField] private State _state;
 
 
         void Start()
@@ -34,6 +34,49 @@ namespace NPC
             _agent = GetComponent<NavMeshAgent>();
             //StartCoroutine(waypointscycle());
         }
+
+        void ChangeAnimatorState(State changeTo)
+        {
+            if (changeTo == State.Idle)
+            {
+                TurnOffCurrentState();
+                _animator.SetBool("Idle", true);
+                _state = State.Idle;
+            } else if (changeTo == State.Run)
+            {
+                TurnOffCurrentState();
+                _animator.SetBool("Run", true);
+                _state = State.Run;
+            } else if (changeTo == State.Attack)
+            {
+                TurnOffCurrentState();
+                _animator.SetBool("Attack", true);
+                _state = State.Attack;
+            } else if (changeTo == State.Walk)
+            {
+                TurnOffCurrentState();
+                _animator.SetBool("Walk", true);
+                _state = State.Walk;
+            }
+        }
+
+        void TurnOffCurrentState()
+        {
+            if (_state == State.Attack)
+            {
+                _animator.SetBool("Attack", false);
+            } else if (_state == State.Run)
+            {
+                _animator.SetBool("Run", false);
+            } else if (_state == State.Idle)
+            {
+                _animator.SetBool("Idle", false);
+            } else if (_state == State.Walk)
+            {
+                _animator.SetBool("Walk", false);
+            }
+        }
+        
 
         private void FixedUpdate()
         {
@@ -56,28 +99,27 @@ namespace NPC
                     _agent.speed = runSpeed;
                     transform.LookAt(target);
 
-
+/*
                     if (distTo <= 5f && _state != State.Idle)
                     {
-                        _animator.SetBool("Walk", false);
-                        _animator.SetBool("Idle", true);
-                        _animator.SetBool("Run", false);
-                        _state = State.Idle;
-                    }
+                       // _animator.SetBool("Walk", false);
+                       // _animator.SetBool("Idle", true);
+                       // _animator.SetBool("Run", false);
+                        //_state = State.Idle;
+                        ChangeAnimatorState(State.Idle);
+                    } */
                     if (distTo <= 3.3f)
                     {
                         //_animator.SetBool("Idle", true);
                         //_animator.SetBool("Run", false);
+                        ChangeAnimatorState(State.Idle);
                         _agent.destination = transform.position;
                         //Start attacking
-                    }else if (distTo > 5f)
+                    }else //if (distTo > 5f)
                     {
                         if (_state != State.Run)
                         {
-                            _animator.SetBool("Walk", false);
-                            _animator.SetBool("Idle", false);
-                            _animator.SetBool("Run", true);
-                            _state = State.Run;
+                            ChangeAnimatorState(State.Run);
                         }
                         Vector3 moveTo = Vector3.MoveTowards(transform.position, target.position, 100f);
                         _agent.destination = moveTo;
@@ -87,7 +129,7 @@ namespace NPC
             } else if (distTo > attackRadius)
             {
                 _agent.speed = walkSpeed;
-                _animator.SetBool("Run", false);
+                
                 inRange = false;
                 timer = 0;
                 if (!_coroutineActive)
@@ -141,11 +183,9 @@ namespace NPC
                 yield return _delay;
                 _agent.destination = waypoints[_currentPoint].position;
                 UpdateCurrentPoint();
-                _animator.SetBool("Idle", false);
-                _animator.SetBool("Walk", true);
+                ChangeAnimatorState(State.Walk);
                 yield return new WaitUntil(() => Vector3.Distance(_agent.destination, transform.position) < 2f);
-                _animator.SetBool("Walk", false);
-                _animator.SetBool("Idle", true);
+                ChangeAnimatorState(State.Idle);
                 StartCoroutine(Waypointscycle());
         }
         
