@@ -4637,8 +4637,7 @@ AnimationClip:
         time: 0.7666667
         value: {x: -0.0032188057, y: 0.00000001862639, z: 6.006246e-11, w: 0.9999948}
         inSlope: {x: -0.000013969827, y: -0.00021307183, z: 0.002939342, w: 0}
-        outSlope: {x: -0.0000023283073, y: -0.0000016757091, z: 0.0000000057963376,
-          w: 0}
+        outSlope: {x: -0.0000023283073, y: -0.0000016757091, z: 0.0000000057963376, w: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334, w: 0.33333334}
@@ -83764,7 +83763,7 @@ AnimationClip:
   - time: 0.8333333
     functionName: BiteAttack
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: ec5e0eae3418b2c448927f7fe9f4e640, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

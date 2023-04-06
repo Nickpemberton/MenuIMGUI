@@ -57,18 +57,37 @@ public class Attributes : MonoBehaviour
         isDead = true;
     }
 
+    public virtual void SetHealth()
+    {
+        attributes[0].displayImage.fillAmount = Mathf.Clamp01(attributes[0].currentValue / attributes[0].maxValue);
+    }
+
+    public virtual void SetMana()
+    {
+        attributes[1].displayImage.fillAmount = Mathf.Clamp01(attributes[1].currentValue / attributes[1].maxValue);
+    }
+
+    public virtual void SetStamina()
+    {
+        attributes[2].displayImage.fillAmount = Mathf.Clamp01(attributes[2].currentValue / attributes[2].maxValue);
+    }
+
 
     public virtual void Update()
     {
         #region Attributes Display
-
+/*
         for (int i = 0; i < attributes.Length; i++)
         {
             // divides current by max to get a percent, and then clamps between 0 and 1, and sets to fill amount
             attributes[i].displayImage.fillAmount = Mathf.Clamp01(attributes[i].currentValue / attributes[i].maxValue);
         }
 
+*/
 
+SetHealth();
+SetMana();
+SetStamina();
         #endregion
 
         #region Can Heal

@@ -86,9 +86,9 @@ namespace NPC
         }
 
 
-        void Attack()
+        public void BiteAttack()
         {
-            ChangeAnimatorState(State.Attack);
+            
             attackTimer = 0;
             _playerStats.Damage(damageAmt);
             
@@ -121,17 +121,17 @@ namespace NPC
                     {
                         _agent.destination = transform.position;
                         attackTimer += Time.deltaTime;
-                        
+
                         if ((state != State.Idle) && attackTimer < 2f)
                         {
                             ChangeAnimatorState(State.Idle);
                         }
-                        if ((state != State.Attack) && attackTimer >= 2f)
+                        if ((state != State.Attack) && attackTimer >= 1.4f)
                         {
-                            Attack();
-                            
+                            ChangeAnimatorState(State.Attack);
                         }
-                        //Start attacking
+                        
+                        
                     }else if (distTo > 3.3f)
                     {
                         if (state != State.Run)
