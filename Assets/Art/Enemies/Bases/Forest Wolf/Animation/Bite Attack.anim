@@ -83763,7 +83763,7 @@ AnimationClip:
   - time: 0.8333333
     functionName: BiteAttack
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: ec5e0eae3418b2c448927f7fe9f4e640, type: 3}
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
