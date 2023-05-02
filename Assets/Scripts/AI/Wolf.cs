@@ -6,7 +6,10 @@ public class Wolf : EnemyBase
 {
     public override void Start()
     {
+        rend = gameObject.transform.GetChild(0).GetComponent<Renderer>();
+        Debug.Log("Test");
         Difficulty();
+        Debug.Log("Test 2");
         walkSpeed = 1 + difficulty;
         runSpeed = 2 + difficulty;
         base.Start();

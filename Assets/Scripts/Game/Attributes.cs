@@ -1,113 +1,97 @@
-using System.Collections;
-using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+//all things you can kill
 public class Attributes : MonoBehaviour
 {
     #region Structs
-
     [Serializable]
     public struct Attribute
     {
-        public string name; // name of the attribute
-        public float currentValue; // current val of attribute
-        public float maxValue; // max value
-        public float regenValue; // regen value eg heal over time from spell or potion
-        public Image displayImage; // the bar that displays this fill amount eg health bar
+        //the name of the attribute
+        public string name;
+        //the current value of the attribute eg 10
+        public float currentValue;
+        //the maximum value of the attribute eg 100
+        public float maxValue;
+        //the regen value eg heal over time or regen from spell or potion
+        public float regenValue;
+        //the bar that displays this fill amount eg health bar
+        public Image displayImage;
     }
     #endregion
-
     #region Variables
-
+    // start with 3 attributes eg health, stamina and mana
     public Attribute[] attributes = new Attribute[3];
     public bool isDamaged;
     public bool canHeal;
-    public bool isDead;
+    public bool isUnAlived;
     public float healDelayTimer;
-
     #endregion
-
     public virtual void RegenOverTime(int attributeIndex)
     {
-        // regen chosen attribute by its regen amount over time
+        //regen chosen attribute by its regen amount over time
         attributes[attributeIndex].currentValue += Time.deltaTime * attributes[attributeIndex].regenValue;
     }
-
     public virtual void Damage(float damage)
     {
-        // will use this to trigger players screen to flash red later
+        //will use this to trigger players screen to flash red later
         isDamaged = true;
-        // reduce the health by the amount we are damaged
+        //reduce the health by the amount we are damaged
         attributes[0].currentValue -= damage;
-        // delay and healing regen
+        //delay any healing regen
         canHeal = false;
         healDelayTimer = 0;
-        // check if we should be dead and set dead if needed
-        if (attributes[0].currentValue <= 0 && !isDead)
+        //check if we should be unalived and set unalived if needed
+        if (attributes[0].currentValue <= 0 && !isUnAlived)
         {
-            Death();
+            UnAlived();
         }
-
     }
-
-    public virtual void Death()
+    public virtual void UnAlived()
     {
-        isDead = true;
+        //we are unalived
+        isUnAlived = true;
     }
-
     public virtual void SetHealth()
     {
         attributes[0].displayImage.fillAmount = Mathf.Clamp01(attributes[0].currentValue / attributes[0].maxValue);
     }
-
     public virtual void SetMana()
     {
         attributes[1].displayImage.fillAmount = Mathf.Clamp01(attributes[1].currentValue / attributes[1].maxValue);
     }
-
     public virtual void SetStamina()
     {
         attributes[2].displayImage.fillAmount = Mathf.Clamp01(attributes[2].currentValue / attributes[2].maxValue);
     }
-
-
     public virtual void Update()
     {
         #region Attributes Display
-/*
-        for (int i = 0; i < attributes.Length; i++)
-        {
-            // divides current by max to get a percent, and then clamps between 0 and 1, and sets to fill amount
-            attributes[i].displayImage.fillAmount = Mathf.Clamp01(attributes[i].currentValue / attributes[i].maxValue);
-        }
-
-*/
-
-SetHealth();
-SetMana();
-SetStamina();
+        SetHealth();
+        SetMana();
+        SetStamina();
         #endregion
-
         #region Can Heal
-
-        if (!canHeal) // if we can't heal
+        //if we cant heal
+        if (!canHeal)
         {
-            healDelayTimer += Time.deltaTime; 
+            //our heal delay timer goes up
+            healDelayTimer += Time.deltaTime;
+            //when our heal delay timer hits the required amount of time
             if (healDelayTimer >= 5)
             {
-                canHeal = true; // can heal
+                //we can heal again
+                canHeal = true;
             }
         }
-
-        if (canHeal && attributes[0].currentValue < attributes[0].maxValue && attributes[0].currentValue > 0) // if we can heal and are injured but not dead at 0
+        //if we can heal, and are injured but not unalived at 0
+        if (canHeal && attributes[0].currentValue < attributes[0].maxValue && attributes[0].currentValue > 0)
         {
-            RegenOverTime(0); // trigger regen over time for health.
+            //trigger our regen over time on our health attribute
+            RegenOverTime(0);
         }
-
-
         #endregion
     }
-
 }
