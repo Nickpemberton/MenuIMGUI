@@ -9,7 +9,9 @@ public class Wolf : EnemyBase
         Difficulty();
         walkSpeed = 1 + difficulty;
         runSpeed = 2 + difficulty;
+        Debug.Log("test");
         base.Start();
+        Debug.Log("test");
     }
     public override void Update()
     {
