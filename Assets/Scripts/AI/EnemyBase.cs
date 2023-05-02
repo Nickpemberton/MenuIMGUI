@@ -131,13 +131,33 @@ public class EnemyBase : Attributes
 
     public virtual void Die()
     {
-        
+        //if we are alive
+        if (attributes[0].currentValue > 0||isDead)
+        {
+            //dont run this
+            return;
+        }
+        //Set AI state
+        state = AIStates.Die;
+        //Set animation
+        anim.SetTrigger("Die");
+        //stop moving
+        agent.destination = transform.position;
+        agent.speed = 0;
+        agent.enabled = false;
+        //Drop Loot/Quest Item
+        //is dead
+        isDead = true;
     }
 
 #endregion
 
     #region Difficulty
-
+    public void Difficulty()
+    {
+        difficulty = Random.Range(1, maxDifficulty + 1);
+        rend.material = enemyMats[difficulty - 1];
+    }
 
     #endregion
 
