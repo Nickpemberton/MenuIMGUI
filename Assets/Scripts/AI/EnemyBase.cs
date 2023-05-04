@@ -111,7 +111,7 @@ public class EnemyBase : Attributes
     {
         distanceToTarget = Vector3.Distance(player.position, transform.position);
         //if player out of attack range attack
-        if (distanceToPoint > attackRange || isUnAlived || player.GetComponent<PlayerHandler>().isUnAlived)
+        if (distanceToTarget > attackRange || isUnAlived || player.GetComponent<PlayerHandler>().isUnAlived)
         {
             //stop Attacking
             return;
